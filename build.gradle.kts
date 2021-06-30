@@ -49,12 +49,7 @@ subprojects {
 }
 
 mapOf(
-    "spigot_v1_13_R2_2" to "1.13.2",
-    "spigot_v1_14_R4" to "1.14.4",
-    "spigot_v1_15_R2" to "1.15.2",
-    "spigot_v1_16_R3" to "1.16.5",
-    "spigot_v1_17_R1" to "1.17",
-    "spigot_v1_17_R1_2" to "1.17.1",
+    "spigot_v1_17_R1_2" to "1.17.1"
 ).forEach { (projectName, ver) ->
     project(":$projectName") {
         dependencies.implementation("org.spigotmc", "spigot", "${ver}-R0.1-SNAPSHOT")
