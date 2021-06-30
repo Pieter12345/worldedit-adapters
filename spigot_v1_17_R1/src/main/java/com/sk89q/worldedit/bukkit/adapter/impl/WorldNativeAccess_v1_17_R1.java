@@ -106,7 +106,7 @@ public class WorldNativeAccess_v1_17_R1 implements WorldNativeAccess<Chunk, IBlo
 
     @Override
     public boolean isChunkTicking(Chunk chunk) {
-        return chunk.getState().isAtLeast(PlayerChunk.State.c);
+        return chunk.getState().isAtLeast(PlayerChunk.State.TICKING);
     }
 
     @Override
@@ -115,9 +115,9 @@ public class WorldNativeAccess_v1_17_R1 implements WorldNativeAccess<Chunk, IBlo
     }
 
     private static final EnumDirection[] NEIGHBOUR_ORDER = {
-        EnumDirection.e, EnumDirection.f,
-        EnumDirection.a, EnumDirection.b,
-        EnumDirection.c, EnumDirection.d
+        EnumDirection.WEST, EnumDirection.EAST,
+        EnumDirection.DOWN, EnumDirection.UP,
+        EnumDirection.NORTH, EnumDirection.SOUTH
     };
 
     @Override

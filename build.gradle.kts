@@ -48,7 +48,7 @@ mapOf(
     "spigot_v1_17_R1" to "1.17"
 ).forEach { (projectName, ver) ->
     project(":$projectName") {
-        dependencies.implementation("org.spigotmc", "spigot", "${ver}-R0.1-SNAPSHOT")
+        dependencies.implementation(files("libs/original-spigot-${ver}-R0.1-SNAPSHOT.jar"))
     }
 }
 

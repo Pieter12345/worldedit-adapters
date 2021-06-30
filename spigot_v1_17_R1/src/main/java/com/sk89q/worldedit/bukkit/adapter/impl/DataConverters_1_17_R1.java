@@ -105,7 +105,7 @@ class DataConverters_1_17_R1 extends DataFixerBuilder implements com.sk89q.world
     private String fixBlockState(String blockState, int srcVer) {
         NBTTagCompound stateNBT = stateToNBT(blockState);
         Dynamic<NBTBase> dynamic = new Dynamic<>(OPS_NBT, stateNBT);
-        NBTTagCompound fixed = (NBTTagCompound) INSTANCE.fixer.update(DataConverterTypes.n, dynamic, srcVer, DATA_VERSION).getValue();
+        NBTTagCompound fixed = (NBTTagCompound) INSTANCE.fixer.update(DataConverterTypes.BLOCK_STATE, dynamic, srcVer, DATA_VERSION).getValue();
         return nbtToState(fixed);
     }
 
@@ -141,11 +141,11 @@ class DataConverters_1_17_R1 extends DataFixerBuilder implements com.sk89q.world
     }
 
     private String fixBiome(String key, int srcVer) {
-        return fixName(key, srcVer, DataConverterTypes.y);
+        return fixName(key, srcVer, DataConverterTypes.BIOME);
     }
 
     private String fixItemType(String key, int srcVer) {
-        return fixName(key, srcVer, DataConverterTypes.s);
+        return fixName(key, srcVer, DataConverterTypes.ITEM_NAME);
     }
 
     private static String fixName(String key, int srcVer, TypeReference type) {
@@ -155,7 +155,7 @@ class DataConverters_1_17_R1 extends DataFixerBuilder implements com.sk89q.world
 
     private final Spigot_v1_17_R1 adapter;
 
-    private static final DynamicOpsNBT OPS_NBT = DynamicOpsNBT.a;
+    private static final DynamicOpsNBT OPS_NBT = DynamicOpsNBT.INSTANCE;
     private static final int LEGACY_VERSION = 1343;
     private static int DATA_VERSION;
     static DataConverters_1_17_R1 INSTANCE;
@@ -168,14 +168,14 @@ class DataConverters_1_17_R1 extends DataFixerBuilder implements com.sk89q.world
     private static final Map<String, LegacyType> DFU_TO_LEGACY = new HashMap<>();
 
     public enum LegacyType {
-        LEVEL(DataConverterTypes.a),
-        PLAYER(DataConverterTypes.b),
-        CHUNK(DataConverterTypes.c),
-        BLOCK_ENTITY(DataConverterTypes.l),
-        ENTITY(DataConverterTypes.q),
-        ITEM_INSTANCE(DataConverterTypes.m),
-        OPTIONS(DataConverterTypes.e),
-        STRUCTURE(DataConverterTypes.f);
+        LEVEL(DataConverterTypes.LEVEL),
+        PLAYER(DataConverterTypes.PLAYER),
+        CHUNK(DataConverterTypes.CHUNK),
+        BLOCK_ENTITY(DataConverterTypes.BLOCK_ENTITY),
+        ENTITY(DataConverterTypes.ENTITY),
+        ITEM_INSTANCE(DataConverterTypes.ITEM_STACK),
+        OPTIONS(DataConverterTypes.OPTIONS),
+        STRUCTURE(DataConverterTypes.STRUCTURE);
 
         private final TypeReference type;
 
@@ -2446,7 +2446,7 @@ class DataConverters_1_17_R1 extends DataFixerBuilder implements com.sk89q.world
 
         public NBTTagCompound convert(NBTTagCompound cmp) {
             if ("minecraft:bed".equals(cmp.getString("id")) && cmp.getShort("Damage") == 0) {
-                cmp.setShort("Damage", (short) EnumColor.o.getColorIndex());
+                cmp.setShort("Damage", (short) EnumColor.RED.getColorIndex());
             }
 
             return cmp;
